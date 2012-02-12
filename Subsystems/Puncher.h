@@ -8,6 +8,8 @@ private:
 	
 	DigitalInput *punchersensor;
 	
+	int	PuncherState;
+	
 public:
 	Puncher();
 	void PuncherMotorStart();
