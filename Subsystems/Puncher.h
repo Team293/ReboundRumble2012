@@ -14,8 +14,7 @@ public:
 	Puncher();
 	void PuncherMotorStart();
 	void PuncherMotorStop();
-	void PuncherControl();
-	void PuncherRun();
+	void PuncherRun(bool start_puncher);
 
 };
 

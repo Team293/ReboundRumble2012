@@ -36,6 +36,8 @@ static const int COLLAR_ENCDR_BCHNL_DIN = 8;
 static const int PUNCHER_STOP_STATE = 0;
 static const int PUNCHER_START_STATE = 1;
 static const int PUNCHER_RUN_STATE = 2;
+
+
 static const int COLLAR_FWD_LIM_DIN = 9;
 static const int COLLAR_REV_LIM_DIN = 10;
 
