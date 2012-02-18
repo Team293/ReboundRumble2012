@@ -237,9 +237,6 @@
                 <stringAttribute value="PPC603gnu"/>
             </listAttribute>
             <intAttribute key="BuildSupportEnabled" value="1"/>
-            <listAttribute key="BuildSupportForBuildSpecs">
-                <stringAttribute value="PPC603gnu"/>
-            </listAttribute>
             <booleanAttribute key="BuildTargetCentric" value="true"/>
         </mapAttribute>
     </attributes>

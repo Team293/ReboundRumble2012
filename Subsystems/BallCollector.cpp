@@ -1,10 +1,12 @@
 #include "../Spike.h"
 #include "../RobotMap.h"
 #include "BallCollector.h"
+#include "../Utils/Optical.h"
+
 
 BallCollector::BallCollector() {
-	topmotor = new Jaguar(TOP_CONVEYOR_MOTOR);
-	bottommotor = new Jaguar(BOTTOM_CONVEYOR_MOTOR);
+	topmotor = new Victor(TOP_CONVEYOR_MOTOR);
+	bottommotor = new Victor(BOTTOM_CONVEYOR_MOTOR);
 	
 	//Motor Safety 
 	topmotor->SetSafetyEnabled(true);
@@ -12,15 +14,16 @@ BallCollector::BallCollector() {
 	bottommotor->SetSafetyEnabled(true);
 	bottommotor->SetExpiration(0.5);
 	
-	topsensor = new DigitalInput(TOP_SENSOR);
-	bottomsensor = new DigitalInput(BOTTOM_SENSOR);
-	shootersensor = new DigitalInput(SHOOTER_SENSOR);
-
-	ballcount = 0; 
-
+	topsensor = new LimitSensor(TOP_SENSOR, 1);
+	bottomsensor = new LimitSensor(BOTTOM_SENSOR, 1);
+	shootersensor = new LimitSensor(SHOOTER_SENSOR, 1);
+	
 	shooterState = SHOOTER_EMPTY_STATE;
 	topState = TOP_CONVEYOR_EMPTY_STATE;
 	bottomState = BOTTOM_CONVEYOR_EMPTY_STATE;
+	
+
+	ballcount = 0; 
 }
 
 void BallCollector::BothMotorsStop() {
@@ -45,82 +48,108 @@ void BallCollector::BottomConveyorMotorStop() {
 
 void BallCollector::ConveyorStateMachine() {
 	//Shooter state machine
-
 	switch(shooterState) 
 	{
 		case SHOOTER_EMPTY_STATE:
-			if (shootersensor->Get() == 1) {
+			//if there is a ball in the shooter, the state is changed to full
+			if (shootersensor->AtLimit() == 1) {
 				shooterState = SHOOTER_FULL_STATE;
 			}
 		break;
 
 		case SHOOTER_FULL_STATE:
-			if (shootersensor->Get() == 0) {
+			//if the ball is shot (not in the shooter anymore) then the ballcount
+			//decreases by one and goes to empty state
+			if (shootersensor->AtLimit() == 0) {
 				ballcount--;
 				shooterState = SHOOTER_EMPTY_STATE;
 			}
-		default:
-			BothMotorsStop();
-			cout << "ERROR!!! EXTERMINATE! EXTERMINATE!"; 
 		break;
+		
+		//default:
+			//BothMotorsStop()	
 	}
+	
 	//Top conveyor state machine
 
 	switch(topState) {
 		case TOP_CONVEYOR_EMPTY_STATE:
-			if (topsensor->Get() == 1) {
+			//if the top conveyor sees a ball then the state is changed to full
+			if (topsensor->AtLimit() == 1) {
 				topState = TOP_CONVEYOR_FULL_STATE;
 			}
+
+			else TopConveyorMotorStart();
 		break;
 
 		case TOP_CONVEYOR_FULL_STATE:
+			//if the shooter and top conveyor has a ball (is full) then 
+			//the top conveyor motor stops. Otherwise, the conveyor motor 
+			//cotinues to run.
 			if (shooterState == SHOOTER_FULL_STATE) {
 				TopConveyorMotorStop();
 			}
-			else {
+			else TopConveyorMotorStart();
+			
+			if (topsensor->AtLimit() == 0) {
 				TopConveyorMotorStart();
+				topState = TOP_CONVEYOR_EMPTY_STATE;
 			}
 		break;
 
-		default:
-			BothMotorsStop();
-			cout << "ERROR!!! EXTERMINATE! EXTERMINATE!";
-		break;
+		//default:
+			//TopConveyorMotorStart();
 	}
 	//Bottom conveyor state machine
 
 	switch(bottomState) {
 		case BOTTOM_CONVEYOR_FULL_STATE:
-			ballcount++;
-			if (topState == 1) {
+			if(bottomsensor->AtLimit() == 0) {
+				ballcount++;
+			}
+			
+			if (topState == TOP_CONVEYOR_FULL_STATE) {
+				//if the ballcount is less than max (ball not in shooter but 
+				//in top conveyor) then the bottom motor runs
 				if (ballcount < MAX_BALLS) {
 					BottomConveyorMotorStart();
 				}
+				//Otherwise, the motor is stopped
 				else {
 					BottomConveyorMotorStop();
 				}
 			}
+			
+			//Otherwise, start the bottom motor AND the upper conveyor motor
 			else {
-				bottomState = BOTTOM_CONVEYOR_EMPTY_STATE;
 				BottomConveyorMotorStart();
-			}
+				bottomState = BOTTOM_CONVEYOR_EMPTY_STATE;
+			
+				}
+		break;
 
 		case BOTTOM_CONVEYOR_EMPTY_STATE:
-			if (topState == 1) {
-				if (ballcount < MAX_BALLS) {
+			//if the top conveyor motor is full and the ball count is less then 
+			//max, run the bottom motor
+			//Otherwise, stop the bottom motor
+			if (topState == TOP_CONVEYOR_FULL_STATE) {
+				if (ballcount < MAX_BALLS){
 					BottomConveyorMotorStart();
-					}
-				else {
-					BottomConveyorMotorStop();
 				}
-			if (bottomsensor->Get() == 1) {
+				else BottomConveyorMotorStop();
+			}
+			
+			//Otherwise (if the top conveyor is not full) run the motor
+			else BottomConveyorMotorStart();
+			
+			//If the bottom conveyor sees a ball, change state to full
+			if (bottomsensor->AtLimit() == 1) {
 				bottomState = BOTTOM_CONVEYOR_FULL_STATE;
 			}
-
-			}
-		default:
-			BothMotorsStop();
-			cout << "ERROR!!!";
 		break;
+		
+		//default:
+			//BottomConveyorMotorStart();
+			//TopConveyorMotorStart();
 	}
 }

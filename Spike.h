@@ -26,8 +26,16 @@ class Spike : public IterativeRobot {
 	Vision * vision;
 
 	//OI
+	Joystick * lstick;
+	Joystick * rstick;
+	Joystick * gamepad;
+	
+	Button * puncherbutton; 
 	
 	//Global Variables
+	float turretinput;
+	float collarinput;
+	
 	
 public:
 	Spike();

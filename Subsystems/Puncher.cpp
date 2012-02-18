@@ -1,15 +1,18 @@
 #include "../Spike.h"
 #include "../RobotMap.h"
 #include "Puncher.h"
+#include "../Utils/LimitSensor.h"
 
 
 Puncher::Puncher() {
 	punchermotor = new Jaguar(PUNCHER_MOTOR);
-	punchersensor = new OpticalSensor(PUNCHER_SENSOR);
+	punchersensor = new LimitSensor(PUNCHER_SENSOR, 1);
+	
+	PuncherState = PUNCHER_STOP_STATE;
 }
 
 void Puncher::PuncherMotorStart() {
-	punchermotor->Set(1.0);
+	punchermotor->Set(0.5);
 }
 
 void Puncher::PuncherMotorStop() {
@@ -23,7 +26,7 @@ void Puncher::PuncherRun(bool start_puncher) {
 			        if ( start_puncher == 1 )
 			        {
 			            // Puncher signaled to start
-						runPuncherMotor();
+						PuncherMotorStart();
 						PuncherState = PUNCHER_START_STATE;
 			        }
 					else
@@ -38,7 +41,7 @@ void Puncher::PuncherRun(bool start_puncher) {
 					// Continue to run the puncher motor
 					PuncherMotorStart();
 
-					if ( punchersensor->isPresent() == 0)
+					if ( punchersensor->AtLimit() == 0)
 			        {
 			            // If the puncher has cleared the position sensor
 						// then go to the RUN state
@@ -47,7 +50,7 @@ void Puncher::PuncherRun(bool start_puncher) {
 			    break;
 
 			    case PUNCHER_RUN_STATE:
-			        if ( punchersensor->isPresent() == 1 )
+			        if ( punchersensor->AtLimit() == 1)
 			        {
 			            // If the puncher position sensor detects the
 						// stopped position, then stop the puncher motor
@@ -69,4 +72,3 @@ void Puncher::PuncherRun(bool start_puncher) {
 			    break;
 			}
 		}
-

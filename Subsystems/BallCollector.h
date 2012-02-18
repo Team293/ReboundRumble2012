@@ -1,6 +1,7 @@
 #ifndef BALLCOLLECTOR_H
 #define BALLCOLLECTOR_H
 #include "WPILib.h"
+#include "../Utils/LimitSensor.h"
 
 class BallCollector {
 public:
@@ -13,12 +14,12 @@ public:
 	void ConveyorStateMachine();
 
 private:
-	Jaguar *topmotor;
-	Jaguar *bottommotor;
+	Victor *topmotor;
+	Victor *bottommotor;
 	
-	DigitalInput *bottomsensor;
-	DigitalInput *topsensor;
-	DigitalInput *shootersensor;
+	LimitSensor *bottomsensor;
+	LimitSensor *topsensor;
+	LimitSensor *shootersensor;
 
 	int ballcount;
 

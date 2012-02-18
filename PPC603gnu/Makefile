@@ -190,14 +190,6 @@ SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Subsystems/Drive
 	$(TRACE_FLAG)if [ ! -d "`dirname "$@"`" ]; then mkdir -p "`dirname "$@"`"; fi;echo "building $@"; $(TOOL_PATH)ccppc $(DEBUGFLAGS_C++-Compiler) $(CC_ARCH_SPEC) -ansi -Wall  -MD -MP -mlongcall $(ADDED_C++FLAGS) $(IDE_INCLUDES) $(ADDED_INCLUDES) -DCPU=$(CPU) -DTOOL_FAMILY=$(TOOL_FAMILY) -DTOOL=$(TOOL) -D_WRS_KERNEL   $(DEFINES) -o "$@" -c "$<"
 
 
-SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Subsystems/LimitSensor.o : $(PRJ_ROOT_DIR)/Subsystems/LimitSensor.cpp $(FORCE_FILE_BUILD)
-	$(TRACE_FLAG)if [ ! -d "`dirname "$@"`" ]; then mkdir -p "`dirname "$@"`"; fi;echo "building $@"; $(TOOL_PATH)ccppc $(DEBUGFLAGS_C++-Compiler) $(CC_ARCH_SPEC) -ansi -Wall  -MD -MP -mlongcall $(ADDED_C++FLAGS) $(IDE_INCLUDES) $(ADDED_INCLUDES) -DCPU=$(CPU) -DTOOL_FAMILY=$(TOOL_FAMILY) -DTOOL=$(TOOL) -D_WRS_KERNEL   $(DEFINES) -o "$@" -c "$<"
-
-
-SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Subsystems/Optical.o : $(PRJ_ROOT_DIR)/Subsystems/Optical.cpp $(FORCE_FILE_BUILD)
-	$(TRACE_FLAG)if [ ! -d "`dirname "$@"`" ]; then mkdir -p "`dirname "$@"`"; fi;echo "building $@"; $(TOOL_PATH)ccppc $(DEBUGFLAGS_C++-Compiler) $(CC_ARCH_SPEC) -ansi -Wall  -MD -MP -mlongcall $(ADDED_C++FLAGS) $(IDE_INCLUDES) $(ADDED_INCLUDES) -DCPU=$(CPU) -DTOOL_FAMILY=$(TOOL_FAMILY) -DTOOL=$(TOOL) -D_WRS_KERNEL   $(DEFINES) -o "$@" -c "$<"
-
-
 SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Subsystems/Passer.o : $(PRJ_ROOT_DIR)/Subsystems/Passer.cpp $(FORCE_FILE_BUILD)
 	$(TRACE_FLAG)if [ ! -d "`dirname "$@"`" ]; then mkdir -p "`dirname "$@"`"; fi;echo "building $@"; $(TOOL_PATH)ccppc $(DEBUGFLAGS_C++-Compiler) $(CC_ARCH_SPEC) -ansi -Wall  -MD -MP -mlongcall $(ADDED_C++FLAGS) $(IDE_INCLUDES) $(ADDED_INCLUDES) -DCPU=$(CPU) -DTOOL_FAMILY=$(TOOL_FAMILY) -DTOOL=$(TOOL) -D_WRS_KERNEL   $(DEFINES) -o "$@" -c "$<"
 
@@ -214,6 +206,14 @@ SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Subsystems/Visio
 	$(TRACE_FLAG)if [ ! -d "`dirname "$@"`" ]; then mkdir -p "`dirname "$@"`"; fi;echo "building $@"; $(TOOL_PATH)ccppc $(DEBUGFLAGS_C++-Compiler) $(CC_ARCH_SPEC) -ansi -Wall  -MD -MP -mlongcall $(ADDED_C++FLAGS) $(IDE_INCLUDES) $(ADDED_INCLUDES) -DCPU=$(CPU) -DTOOL_FAMILY=$(TOOL_FAMILY) -DTOOL=$(TOOL) -D_WRS_KERNEL   $(DEFINES) -o "$@" -c "$<"
 
 
+SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Utils/LimitSensor.o : $(PRJ_ROOT_DIR)/Utils/LimitSensor.cpp $(FORCE_FILE_BUILD)
+	$(TRACE_FLAG)if [ ! -d "`dirname "$@"`" ]; then mkdir -p "`dirname "$@"`"; fi;echo "building $@"; $(TOOL_PATH)ccppc $(DEBUGFLAGS_C++-Compiler) $(CC_ARCH_SPEC) -ansi -Wall  -MD -MP -mlongcall $(ADDED_C++FLAGS) $(IDE_INCLUDES) $(ADDED_INCLUDES) -DCPU=$(CPU) -DTOOL_FAMILY=$(TOOL_FAMILY) -DTOOL=$(TOOL) -D_WRS_KERNEL   $(DEFINES) -o "$@" -c "$<"
+
+
+SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Utils/Optical.o : $(PRJ_ROOT_DIR)/Utils/Optical.cpp $(FORCE_FILE_BUILD)
+	$(TRACE_FLAG)if [ ! -d "`dirname "$@"`" ]; then mkdir -p "`dirname "$@"`"; fi;echo "building $@"; $(TOOL_PATH)ccppc $(DEBUGFLAGS_C++-Compiler) $(CC_ARCH_SPEC) -ansi -Wall  -MD -MP -mlongcall $(ADDED_C++FLAGS) $(IDE_INCLUDES) $(ADDED_INCLUDES) -DCPU=$(CPU) -DTOOL_FAMILY=$(TOOL_FAMILY) -DTOOL=$(TOOL) -D_WRS_KERNEL   $(DEFINES) -o "$@" -c "$<"
+
+
 OBJECTS_SixWheelCode_partialImage = SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/.metadata/.plugins/com.windriver.ide.core/compilerInspection.o \
 	 SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/.metadata/.plugins/org.eclipse.cdt.make.core/specs.o \
 	 SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/.metadata/.plugins/org.eclipse.cdt.make.core/specs.o \
@@ -221,12 +221,12 @@ OBJECTS_SixWheelCode_partialImage = SixWheelCode_partialImage/$(MODE_DIR)/Object
 	 SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Subsystems/BallCollector.o \
 	 SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Subsystems/Collar.o \
 	 SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Subsystems/Drivetrain.o \
-	 SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Subsystems/LimitSensor.o \
-	 SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Subsystems/Optical.o \
 	 SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Subsystems/Passer.o \
 	 SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Subsystems/Puncher.o \
 	 SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Subsystems/Turret.o \
-	 SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Subsystems/Vision.o
+	 SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Subsystems/Vision.o \
+	 SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Utils/LimitSensor.o \
+	 SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Utils/Optical.o
 
 SixWheelCode_partialImage/$(MODE_DIR)/SixWheelCode_partialImage.o : $(OBJECTS_SixWheelCode_partialImage)
 	$(TRACE_FLAG)if [ ! -d "`dirname "$@"`" ]; then mkdir -p "`dirname "$@"`"; fi;echo "building $@"; $(TOOL_PATH)ccppc -r -nostdlib -Wl,-X  -o "$@" $(OBJECTS_SixWheelCode_partialImage) $(LIBPATH) $(LIBS) $(ADDED_LIBPATH) $(ADDED_LIBS)  && if [ "$(EXPAND_DBG)" = "1" ]; then plink "$@";fi
@@ -242,9 +242,9 @@ force :
 
 DEP_FILES := SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/.metadata/.plugins/com.windriver.ide.core/compilerInspection.d SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/.metadata/.plugins/org.eclipse.cdt.make.core/specs.d SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/.metadata/.plugins/org.eclipse.cdt.make.core/specs.d \
 	 SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Spike.d SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Subsystems/BallCollector.d SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Subsystems/Collar.d \
-	 SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Subsystems/Drivetrain.d SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Subsystems/LimitSensor.d SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Subsystems/Optical.d \
-	 SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Subsystems/Passer.d SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Subsystems/Puncher.d SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Subsystems/Turret.d \
-	 SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Subsystems/Vision.d
+	 SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Subsystems/Drivetrain.d SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Subsystems/Passer.d SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Subsystems/Puncher.d \
+	 SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Subsystems/Turret.d SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Subsystems/Vision.d SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Utils/LimitSensor.d \
+	 SixWheelCode_partialImage/$(MODE_DIR)/Objects/ReboundRumble2012/Utils/Optical.d
 -include $(DEP_FILES)
 
 
